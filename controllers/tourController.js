@@ -50,7 +50,7 @@ exports.updateTour = async (req, res) => {
     res.status(200).json({
       status: 'success',
       data: {
-        tour: '<Updated tour here....>',
+        tour,
       },
     });
   } catch (err) {
@@ -82,9 +82,12 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.deleteTour = (req, res) => {
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
+exports.deleteTour = async (req, res) => {
+  try {
+    const tour = await Tour.findById();
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {}
 };
